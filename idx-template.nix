@@ -11,7 +11,7 @@ in {
     pkgs.gnutar
     pkgs.xz
     pkgs.git
-    pkgs.busybox
+   
     
   ];
   bootstrap = ''  
