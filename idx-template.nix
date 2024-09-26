@@ -1,17 +1,29 @@
-{ pkgs, mode, routing, flutter, backend, ... }: {
+{ pkgs, mode, routing, flutter, backend, ... }:
+let 
+  flutter = pkgs.fetchzip {
+    url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.3-stable.tar.xz";
+    hash = "sha256-1MNsakGh9idMUR8bSDu7tVpZB6FPn6nmtvc+Gi10+SA=";
+  };
+  
+in {
   packages = [
     pkgs.curl
     pkgs.gnutar
     pkgs.xz
     pkgs.git
     pkgs.busybox
-    pkgs.flutter
+    
   ];
   bootstrap = ''  
+    cp -rf ${flutter} flutter
+    chmod -R u+w flutter
+    export PATH="$PATH":"$HOME/flutter/bin" 
+    mkdir -p $HOME/.pub-cache/hosted/pub.dev/
+    mkdir -p $HOME/.pub-cache/log
+    mkdir -p $HOME/.pub-cache/bin
+    export PUB_CACHE=$HOME/.pub-cache
     export PATH="$PATH":"$HOME/.pub-cache/bin"
-    git config --global --add safe.directory /nix/store/037ykxd947fmv1la96hgsm7m1jrf9mk1-flutter-3.13.8-unwrapped
-    flutter upgrade
-    dart pub global activate jaspr_cli  
+    ./flutter/bin/dart pub global activate jaspr_cli  
     jaspr update  
     jaspr create "$out" --mode="${mode}" --routing="${routing}" --flutter="${flutter}" --backend="${backend}"
     mkdir  "$out/.idx/"
