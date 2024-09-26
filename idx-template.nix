@@ -1,4 +1,4 @@
-{ pkgs, mode, routing, flutter, backend, ... }: {
+{ pkgs, template, ... }: {
   packages = [
     pkgs.curl
     pkgs.gnutar
@@ -10,8 +10,7 @@
   bootstrap = ''  
     export PATH="$PATH":"$HOME/.pub-cache/bin"
     dart pub global activate jaspr_cli  
-
-    jaspr create "$out" --mode="${mode}" --routing="${routing}" --flutter="${flutter}" --backend="${backend}"
+    jaspr create "$out" --template="${template}"
     mkdir  "$out/.idx/"
     cp ${./dev.nix} "$out/.idx/dev.nix"
     chmod -R +w "$out"
