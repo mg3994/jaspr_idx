@@ -17,7 +17,7 @@ in {
   bootstrap = ''  
     cp -rf ${flutter} flutter
     chmod -R u+w flutter
-    chmod +x flutter/bin/cache/dart-sdk/bin/dart
+   
     export PATH="$PATH":"$HOME/flutter/bin" 
     mkdir -p $HOME/.pub-cache/hosted/pub.dev/
     mkdir -p $HOME/.pub-cache/log
@@ -26,6 +26,11 @@ in {
     export PATH="$PATH":"$HOME/.pub-cache/bin"
    # export DART_SDK="$HOME/flutter/bin/cache/dart-sdk"
     # $HOME/flutter/bin/cache/dart-sdk/bin/dart --version
+       # Check if Dart exists after copying
+    if [ ! -f "$HOME/flutter/bin/cache/dart-sdk/bin/dart" ]; then
+      echo "Dart executable not found!"
+      exit 1
+    fi
     dart pub global activate jaspr_cli  
     jaspr update  
     jaspr create "$out" --mode="${mode}" --routing="${routing}" --flutter="${flutter}" --backend="${backend}"
