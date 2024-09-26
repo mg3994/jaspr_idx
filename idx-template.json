@@ -14,18 +14,56 @@
     },
     "params": [
         {
-            "id": "template",
-            "name": "Template",
-            "description": "The template used to generate this new project.",
+            "id": "mode",
+            "name": "Mode",
+            "description": "Choose a rendering mode for the project.",
             "type": "enum",
-            "default": "basic",
+            "default": "static:auto",
             "required": false,
             "options": {
-                "basic": "(Recommended) A basic pure-dart web app with ssr & automatic client hydration.",
-                "classic":"A classic web app using separate html, css and dart files with ssr & manual client hydration.",
-                "client": "A pure client-side app without ssr.",
-                "server": "A purely server-side rendered app without client hydration."
-                
+                "client": "Build a purely client-rendered site.",
+                "server": "Build a server-rendered site.",
+                "server:auto": "Build a server-rendered site with automatic client-side hydration.",
+                "static": "Build a statically pre-rendered site.",
+                "static:auto": "(Recommended) Build a statically pre-rendered site with automatic client-side hydration."
+            }
+        },
+        {
+            "id": "routing",
+            "name": "Routing",
+            "description": "Choose a routing strategy for the project.",
+            "type": "enum",
+            "default": "multi-page",
+            "required": false,
+            "options": {
+                "multi-page": "(Recommended) Sets up multi-page (server-side) routing.",
+                "none": "No preconfigured routing.",
+                "single-page": "Sets up single-page (client-side) routing."
+            }
+        },
+        {
+            "id": "flutter",
+            "name": "Flutter",
+            "description": "Choose the Flutter support for the project.",
+            "type": "enum",
+            "default": "plugins-only",
+            "required": false,
+            "options": {
+                "embedded": "Sets up an embedded Flutter app inside your site.",
+                "none": "No preconfigured Flutter support.",
+                "plugins-only": "(Recommended) Enables support for using Flutter web plugins."
+            }
+        },
+        {
+            "id": "backend",
+            "name": "Backend",
+            "description": "Choose the backend setup for the project (only valid in 'server' mode).",
+            "type": "enum",
+            "default": "none",
+            "required": false,
+            "options": {
+                "none": "No custom backend setup.",
+                "shelf": "Sets up a custom backend using the shelf package."
             }
         }
     ]
