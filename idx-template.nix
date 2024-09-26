@@ -9,6 +9,7 @@
   ];
   bootstrap = ''  
     export PATH="$PATH":"$HOME/.pub-cache/bin"
+    flutter upgrade
     dart pub global activate jaspr_cli  
     jaspr update  
     jaspr create "$out" --mode="${mode}" --routing="${routing}" --flutter="${flutter}" --backend="${backend}"
