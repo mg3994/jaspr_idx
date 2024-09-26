@@ -7,7 +7,7 @@
         "Frontend",
         "Backend"
     ],
-    "icon": "https://github.com/schultek/jaspr/blob/main/assets/jaspr_icon.png",
+    "icon": "https://raw.githubusercontent.com/mg3994/jaspr_idx/c1c950194b77dfe1dcfeee7d31a6fa83554bb85e/icon.svg",
     "publisher": "Manish Gautam",
     "host": {
         "virtualization": true
