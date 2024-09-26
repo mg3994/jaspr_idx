@@ -7,7 +7,7 @@
         "Frontend",
         "Backend"
     ],
-    "icon": "https://www.gstatic.com/images/branding/productlogos/flutter/v6/192px.svg",
+    "icon": "https://github.com/schultek/jaspr/blob/main/assets/jaspr_icon.png",
     "publisher": "Manish Gautam",
     "host": {
         "virtualization": true
