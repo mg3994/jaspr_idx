@@ -14,8 +14,23 @@
     },
     "params": [
         {
-            "id": "mode",
+            "id": "template",
             "name": "Template",
+            "description": "The template used to generate this new project.",
+            "type": "enum",
+            "default": "basic",
+            "required": false,
+            "options": {
+                "basic": "(Recommended) A basic pure-dart web app with ssr & automatic client hydration.",
+                "classic":"A classic web app using separate html, css and dart files with ssr & manual client hydration.",
+                "client": "A pure client-side app without ssr.",
+                "server": "A purely server-side rendered app without client hydration."
+                
+            }
+        },
+        {
+            "id": "mode",
+            "name": "Mode",
             "description": "Choose a rendering mode for the project.",
             "type": "enum",
             "default": "static:auto",
