@@ -17,12 +17,15 @@ in {
   bootstrap = ''  
     cp -rf ${flutter} flutter
     chmod -R u+w flutter
+    chmod +x flutter/bin/cache/dart-sdk/bin/dart
     export PATH="$PATH":"$HOME/flutter/bin" 
     mkdir -p $HOME/.pub-cache/hosted/pub.dev/
     mkdir -p $HOME/.pub-cache/log
     mkdir -p $HOME/.pub-cache/bin
     export PUB_CACHE=$HOME/.pub-cache
     export PATH="$PATH":"$HOME/.pub-cache/bin"
+    export DART_SDK="$HOME/flutter/bin/cache/dart-sdk"
+    $HOME/flutter/bin/cache/dart-sdk/bin/dart --version
     ./flutter/bin/dart pub global activate jaspr_cli  
     jaspr update  
     jaspr create "$out" --mode="${mode}" --routing="${routing}" --flutter="${flutter}" --backend="${backend}"
