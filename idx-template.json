@@ -1,6 +1,6 @@
 {
     "name": "Jaspr",
-    "description": "...",
+    "description": "A modern web framework for building websites in Dart with support for both client-side and server-side rendering.",
     "categories": [
         "Web app",
         "Website",
