@@ -24,9 +24,9 @@ in {
     mkdir -p $HOME/.pub-cache/bin
     export PUB_CACHE=$HOME/.pub-cache
     export PATH="$PATH":"$HOME/.pub-cache/bin"
-    export DART_SDK="$HOME/flutter/bin/cache/dart-sdk"
-    $HOME/flutter/bin/cache/dart-sdk/bin/dart --version
-    ./flutter/bin/dart pub global activate jaspr_cli  
+   # export DART_SDK="$HOME/flutter/bin/cache/dart-sdk"
+    # $HOME/flutter/bin/cache/dart-sdk/bin/dart --version
+    dart pub global activate jaspr_cli  
     jaspr update  
     jaspr create "$out" --mode="${mode}" --routing="${routing}" --flutter="${flutter}" --backend="${backend}"
     mkdir  "$out/.idx/"
