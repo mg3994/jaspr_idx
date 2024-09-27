@@ -3,19 +3,19 @@
 let
   # Fetch the latest Flutter stable release
   flutter = pkgs.fetchzip {
-    url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.3-stable.tar.xz";  # Update for latest version
-    hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk=";  # Update hash as needed
+    url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.3-stable.tar.xz";  # Update this URL for the latest version
+    hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk=";  # Update the hash when the version changes
   };
 
-  dart-sdk = pkgs.dart;  # Include Dart SDK for clarity, but Flutter should have its own
-  
+  dart-sdk = pkgs.dart;  # Ensure the Dart SDK is available
+
 in {
   packages = [
     pkgs.curl
     pkgs.gnutar
     pkgs.xz
     pkgs.git
-    dart-sdk  # Include Dart SDK in the environment
+    dart-sdk  # Include the Dart SDK in the environment
   ];
 
   bootstrap = ''
@@ -24,21 +24,29 @@ in {
     # Set up the Flutter environment
     export PATH="$PATH:${flutter}/bin"
     export PATH="$PATH:$HOME/.pub-cache/bin"
-    export PATH="$PATH:${dart-sdk}/bin"  # Include Dart SDK in PATH
+    export PATH="$PATH:${dart-sdk}/bin"  # Add Dart SDK to PATH
 
-    # Check for Dart SDK existence in Flutter cache
-    # if [ ! -f "${flutter}/bin/cache/dart-sdk/bin/dart" ]; then
-    #   echo "Dart SDK not found in Flutter cache."
-    #   echo "Running 'flutter doctor' to attempt setup..."
-    #   flutter doctor
-    # fi
+    # Run the Dart SDK update script
+    ${flutter}/bin/internal/update_dart_sdk.sh
 
-    # Initialize Flutter
-    # flutter precache  # Ensure Dart SDK and Flutter dependencies are downloaded
-    # flutter doctor
+    # Ensure the Flutter SDK is initialized
+    flutter precache  # Precache the Dart SDK and Flutter dependencies
+    flutter doctor
+
+
+
+    # Check if Dart SDK was updated
+    if [ ! -f "${flutter}/bin/cache/dart-sdk/bin/dart" ]; then
+      echo "Dart SDK not found after update."
+      exit 1
+    fi
+
+    # Keep Flutter updated
+    flutter channel stable
+    flutter upgrade
 
     # Activate the jaspr CLI
-    PUB_CACHE=/tmp/pub-cache ./flutter/bin/flutter pub global activate jaspr_cli
+    dart pub global activate jaspr_cli
     jaspr update
 
     # Create the project
