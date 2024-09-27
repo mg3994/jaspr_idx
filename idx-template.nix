@@ -7,7 +7,7 @@ let
     hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk=";  # Update the hash when the version changes
   };
 
-  dart-sdk = pkgs.dart;  # Ensure the Dart SDK is available
+ 
 
 in {
   packages = [
@@ -15,38 +15,20 @@ in {
     pkgs.gnutar
     pkgs.xz
     pkgs.git
-    dart-sdk  # Include the Dart SDK in the environment
+    
   ];
 
   bootstrap = ''
-    cp -rf ${flutter} flutter
-    chmod -R u+w flutter
+    cp -rf ${flutter} /home/user/flutter/bin/flutter
     # Set up the Flutter environment
     export PATH="$PATH:${flutter}/bin"
     export PATH="$PATH:$HOME/.pub-cache/bin"
-    export PATH="$PATH:${dart-sdk}/bin"  # Add Dart SDK to PATH
-
-    # Run the Dart SDK update script
-    ${flutter}/bin/internal/update_dart_sdk.sh
-
-    # Ensure the Flutter SDK is initialized
-    flutter precache  # Precache the Dart SDK and Flutter dependencies
-    flutter doctor
-
-
-
-    # Check if Dart SDK was updated
-    if [ ! -f "${flutter}/bin/cache/dart-sdk/bin/dart" ]; then
-      echo "Dart SDK not found after update."
-      exit 1
-    fi
-
     # Keep Flutter updated
     flutter channel stable
     flutter upgrade
 
     # Activate the jaspr CLI
-    dart pub global activate jaspr_cli
+    /home/user/flutter/bin/flutter pub global activate jaspr_cli
     jaspr update
 
     # Create the project
