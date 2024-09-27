@@ -23,10 +23,6 @@ in {
     # Set up the Flutter environment
     export PATH="$PATH:${flutter}/bin"
     export PATH="$PATH:$HOME/.pub-cache/bin"
-    # Keep Flutter updated
-    flutter channel stable
-    flutter upgrade
-
     # Activate the jaspr CLI
     /home/user/flutter/bin/flutter pub global activate jaspr_cli
     jaspr update
