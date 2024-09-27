@@ -5,12 +5,11 @@ let
     owner = "flutter";
     repo = "flutter";
     rev = "refs/heads/stable";  # Get the latest stable branch
-    # Specify a tarball format for the fetch
     url = "https://github.com/flutter/flutter/archive/refs/heads/stable.zip";
-    # Note: You may want to calculate the hash from the actual downloaded file
-    # This is just a placeholder. Update the hash accordingly.
-    hash = "sha256-7MyvXIsj0OX2h++lXmKEQqxM+6bvGGt5WxIwYC5lz2M="; 
+    hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk="; 
   };
+
+  dart-sdk = pkgs.dart;  # Ensure you have the Dart SDK available
 
 in {
   packages = [
@@ -18,12 +17,14 @@ in {
     pkgs.gnutar
     pkgs.xz
     pkgs.git
+    dart-sdk  # Include the Dart SDK in the environment
   ];
 
   bootstrap = ''
     # Set up the Flutter environment
     export PATH="$PATH:${flutter}/bin"
     export PATH="$PATH:$HOME/.pub-cache/bin"
+    export PATH="$PATH:${dart-sdk}/bin"  # Add Dart SDK to PATH
 
     # Ensure the Flutter SDK is initialized
     flutter doctor
