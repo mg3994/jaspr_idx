@@ -1,11 +1,15 @@
-{ pkgs, mode, routing, fltr, backend,... }:
+{ pkgs, mode, routing, fltr, backend, ... }:
 
 let 
   flutter = pkgs.fetchFromGitHub {
     owner = "flutter";
     repo = "flutter";
     rev = "refs/heads/stable";  # Get the latest stable branch
-    src = ./.;  # Fetch the source from the current directory
+    # Specify a tarball format for the fetch
+    url = "https://github.com/flutter/flutter/archive/refs/heads/stable.zip";
+    # Note: You may want to calculate the hash from the actual downloaded file
+    # This is just a placeholder. Update the hash accordingly.
+    hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk="; 
   };
 
 in {
