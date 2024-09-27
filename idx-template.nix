@@ -9,7 +9,7 @@ let
     url = "https://github.com/flutter/flutter/archive/refs/heads/stable.zip";
     # Note: You may want to calculate the hash from the actual downloaded file
     # This is just a placeholder. Update the hash accordingly.
-    hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk="; 
+    hash = "sha256-7MyvXIsj0OX2h++lXmKEQqxM+6bvGGt5WxIwYC5lz2M="; 
   };
 
 in {
