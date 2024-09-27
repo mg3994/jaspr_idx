@@ -6,7 +6,7 @@ let
     repo = "flutter";
     rev = "refs/heads/stable";  # Get the latest stable branch
     url = "https://github.com/flutter/flutter/archive/refs/heads/stable.zip";
-    hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk="; 
+    hash = "sha256-7MyvXIsj0OX2h++lXmKEQqxM+6bvGGt5WxIwYC5lz2M="; 
   };
 
   dart-sdk = pkgs.dart;  # Ensure you have the Dart SDK available
