@@ -19,24 +19,26 @@ in {
   ];
 
   bootstrap = ''
+    cp -rf ${flutter} flutter
+    chmod -R u+w flutter
     # Set up the Flutter environment
     export PATH="$PATH:${flutter}/bin"
     export PATH="$PATH:$HOME/.pub-cache/bin"
     export PATH="$PATH:${dart-sdk}/bin"  # Include Dart SDK in PATH
 
     # Check for Dart SDK existence in Flutter cache
-    if [ ! -f "${flutter}/bin/cache/dart-sdk/bin/dart" ]; then
-      echo "Dart SDK not found in Flutter cache."
-      echo "Running 'flutter doctor' to attempt setup..."
-      flutter doctor
-    fi
+    # if [ ! -f "${flutter}/bin/cache/dart-sdk/bin/dart" ]; then
+    #   echo "Dart SDK not found in Flutter cache."
+    #   echo "Running 'flutter doctor' to attempt setup..."
+    #   flutter doctor
+    # fi
 
     # Initialize Flutter
-    flutter precache  # Ensure Dart SDK and Flutter dependencies are downloaded
-    flutter doctor
+    # flutter precache  # Ensure Dart SDK and Flutter dependencies are downloaded
+    # flutter doctor
 
     # Activate the jaspr CLI
-    dart pub global activate jaspr_cli
+    PUB_CACHE=/tmp/pub-cache ./flutter/bin/flutter pub global activate jaspr_cli
     jaspr update
 
     # Create the project
