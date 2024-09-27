@@ -1,18 +1,10 @@
 { pkgs, mode, routing, fltr, backend, ... }:
 
 let
-  # Function to fetch the latest Flutter hash dynamically
-  fetchFlutterHash = builtins.fetchGit {
-    url = "https://github.com/flutter/flutter.git";
-    rev = "refs/heads/stable";
-  };
-
-  flutter = pkgs.fetchFromGitHub {
-    owner = "flutter";
-    repo = "flutter";
-    rev = fetchFlutterHash.rev;  # Use the latest stable branch
-    url = "https://github.com/flutter/flutter/archive/refs/heads/stable.zip";
-    hash = builtins.hashFile "sha256" "${fetchFlutterHash}/stable.zip";  # Calculate hash dynamically
+  # Fetch the latest stable Flutter version
+  flutter = pkgs.fetchzip {
+    url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.3-stable.tar.xz";  # Update this URL to the latest version
+    hash = "sha256-H20ZBUEVBkbWy9DXbJVGyBwdkgaEVoDbgFL2B3UL1Hk=";  # Update the hash when the version changes
   };
 
   dart-sdk = pkgs.dart;  # Ensure you have the Dart SDK available
