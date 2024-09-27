@@ -32,7 +32,7 @@ in {
     flutter upgrade
 
     # Activate the jaspr CLI
-    dart pub global activate jaspr_cli
+    flutter pub global activate jaspr_cli
     jaspr update
 
     # Create the project
