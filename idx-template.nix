@@ -19,6 +19,7 @@ in {
   ];
 
   bootstrap = ''
+    rm -rf /home/user/flutter/bin/flutter
     cp -rf ${flutter} /home/user/flutter/bin/flutter
     # Set up the Flutter environment
     export PATH="$PATH:${flutter}/bin"
