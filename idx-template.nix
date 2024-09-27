@@ -1,12 +1,18 @@
 { pkgs, mode, routing, fltr, backend, ... }:
 
-let 
+let
+  # Function to fetch the latest Flutter hash dynamically
+  fetchFlutterHash = builtins.fetchGit {
+    url = "https://github.com/flutter/flutter.git";
+    rev = "refs/heads/stable";
+  };
+
   flutter = pkgs.fetchFromGitHub {
     owner = "flutter";
     repo = "flutter";
-    rev = "refs/heads/stable";  # Get the latest stable branch
+    rev = fetchFlutterHash.rev;  # Use the latest stable branch
     url = "https://github.com/flutter/flutter/archive/refs/heads/stable.zip";
-    hash = "sha256-7MyvXIsj0OX2h++lXmKEQqxM+6bvGGt5WxIwYC5lz2M="; 
+    hash = builtins.hashFile "sha256" "${fetchFlutterHash}/stable.zip";  # Calculate hash dynamically
   };
 
   dart-sdk = pkgs.dart;  # Ensure you have the Dart SDK available
@@ -29,8 +35,8 @@ in {
     # Ensure the Flutter SDK is initialized
     flutter doctor
 
-    # Switch to the master channel if needed
-    flutter channel master
+    # Keep Flutter updated
+    flutter channel stable
     flutter upgrade
 
     # Activate the jaspr CLI
