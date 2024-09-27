@@ -42,7 +42,7 @@
             }
         },
         {
-            "id": "flutter",
+            "id": "fltr",
             "name": "Flutter",
             "description": "Choose the Flutter support for the project.",
             "type": "enum",
